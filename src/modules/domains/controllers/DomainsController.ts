@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateDomainService from '../services/CreateDomainService';
+import DeleteDomainService from '../services/DeleteDomainService';
 import ListDomainService from '../services/ListDomainService';
 import ShowDomainService from '../services/ShowDomainService';
 import UpdateStatusDomainService from '../services/UpdateStatusDomainService';
@@ -49,5 +50,15 @@ export default class DomainsController {
     });
 
     return response.json(domain);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteDomain = new DeleteDomainService();
+
+    await deleteDomain.execute({ id });
+
+    return response.status(204).json();
   }
 }
