@@ -42,4 +42,14 @@ domainsRouter.patch(
   domainsController.update,
 );
 
+domainsRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  domainsController.delete,
+);
+
 export default domainsRouter;
