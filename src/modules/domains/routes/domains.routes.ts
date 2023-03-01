@@ -29,4 +29,17 @@ domainsRouter.get(
   domainsController.show,
 );
 
+domainsRouter.patch(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      status: Joi.string().required(),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  domainsController.update,
+);
+
 export default domainsRouter;
