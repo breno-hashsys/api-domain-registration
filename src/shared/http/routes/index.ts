@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import domainsRouter from '@modules/domains/routes/domains.routes';
 
 const routes = Router();
 
-routes.get('/', (request, response) => {
-  return response.json({ message: 'Hello Dev!' });
-});
+routes.use('/domains', domainsRouter);
 
 export default routes;
