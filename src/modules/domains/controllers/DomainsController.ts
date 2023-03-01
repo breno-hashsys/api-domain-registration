@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreateDomainService from '../services/CreateDomainService';
 import ListDomainService from '../services/ListDomainService';
 import ShowDomainService from '../services/ShowDomainService';
+import UpdateStatusDomainService from '../services/UpdateStatusDomainService';
 
 export default class DomainsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -32,6 +33,20 @@ export default class DomainsController {
     const showDomain = new ShowDomainService();
 
     const domain = await showDomain.execute({ id });
+
+    return response.json(domain);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { status } = request.body;
+    const { id } = request.params;
+
+    const updateStatusDomain = new UpdateStatusDomainService();
+
+    const domain = await updateStatusDomain.execute({
+      id,
+      status,
+    });
 
     return response.json(domain);
   }
