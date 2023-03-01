@@ -17,4 +17,14 @@ domainsRouter.post(
   domainsController.create,
 );
 
+domainsRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  domainsController.show,
+);
+
 export default domainsRouter;
