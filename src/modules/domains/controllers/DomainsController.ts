@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateDomainService from '../services/CreateDomainService';
+import ListDomainService from '../services/ListDomainService';
 import ShowDomainService from '../services/ShowDomainService';
 
 export default class DomainsController {
@@ -15,6 +16,14 @@ export default class DomainsController {
     });
 
     return response.status(201).json(domain);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listDomains = new ListDomainService();
+
+    const domains = await listDomains.execute();
+
+    return response.json(domains);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
