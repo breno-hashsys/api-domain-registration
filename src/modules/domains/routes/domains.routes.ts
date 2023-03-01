@@ -17,6 +17,8 @@ domainsRouter.post(
   domainsController.create,
 );
 
+domainsRouter.get('/', domainsController.index);
+
 domainsRouter.get(
   '/:id',
   celebrate({
