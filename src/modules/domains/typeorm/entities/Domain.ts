@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -14,13 +15,13 @@ class Domain {
   @Column()
   client_id: string;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column('decimal')
   price: number;
 
-  @Column({ default: 'Ativo' })
+  @Column()
   status: string;
 
   @Column()
@@ -34,6 +35,13 @@ class Domain {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @BeforeInsert()
+  setDefaultStatus() {
+    if (!this.status) {
+      this.status = 'Ativo';
+    }
+  }
 }
 
 export default Domain;
